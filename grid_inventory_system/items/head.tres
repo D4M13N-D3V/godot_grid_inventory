@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemConfiguration" load_steps=3 format=3 uid="uid://cauw4i0kveld6"]
+
+[ext_resource type="Script" path="res://grid_inventory_system/scripts/ItemConfiguration.gd" id="1_hflmv"]
+[ext_resource type="Texture2D" uid="uid://ghlfm76i4kve" path="res://grid_inventory_system/debug/hat.png" id="1_vm0jo"]
+
+[resource]
+script = ExtResource("1_hflmv")
+item_id = "hat"
+item_name = "Hat"
+item_description = "This is a hat"
+item_size = Vector2(224, 160)
+item_usable = false
+item_equipment = true
+item_equipment_slot = "HEAD"
+item_texture = ExtResource("1_vm0jo")
