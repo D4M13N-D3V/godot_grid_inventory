@@ -56,3 +56,7 @@ mouse={
 "deadzone": 0.5,
 "events": []
 }
+
+[rendering]
+
+textures/lossless_compression/force_png=true
