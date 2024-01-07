@@ -166,7 +166,7 @@ jobs:
           body: |
             Release notes for ${{env.GitVersion_MajorMinorPatch}}
           draft: false
-          prerelease: false
+          prerelease: true
 
       - name: Upload Web Release Asset
         id: upload-release-asset
