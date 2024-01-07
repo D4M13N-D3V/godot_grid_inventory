@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemConfiguration" load_steps=3 format=3 uid="uid://d2orfaiyhg0sa"]
+
+[ext_resource type="Texture2D" uid="uid://bdvx58rwnaeev" path="res://icon.svg" id="1_l6twi"]
+[ext_resource type="Script" path="res://grid_inventory_system/scripts/ItemConfiguration.gd" id="2_40ofh"]
+
+[resource]
+script = ExtResource("2_40ofh")
+item_id = "large_debug_item"
+item_name = "Debug Item Large"
+item_description = "A large item for debugging."
+item_size = Vector2(256, 256)
+item_usable = false
+item_equipment = false
+item_equipment_slot = "NONE"
+item_texture = ExtResource("1_l6twi")
