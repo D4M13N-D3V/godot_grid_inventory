@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/shirt.png-c04d1f8c53dc5f843f267734a8b0f810.ct
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
