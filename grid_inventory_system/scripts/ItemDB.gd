@@ -6,7 +6,8 @@ var ITEMS = {}
 func _ready():
 	# Load items from the "items" directory and populate the ITEMS dictionary
 	for i in DirAccess.get_files_at("res://grid_inventory_system/items"):
-		var item = load("res://grid_inventory_system/items/" + i)
+		if(i.ends_with(".tres")):
+			var item = load("res://grid_inventory_system/items/" + i)
 		ITEMS[item.item_id] = item
 
 # Function to retrieve an item based on its item_id
