@@ -40,6 +40,9 @@ func _process(delta):
 		inventory_open = false
 		inventory_background.visible=false
 		
+	#if(Input.is_action_just_pressed(inventory_rotate_input) and inventory_open==true and inventory_item_dragged != null):
+	#	inventory_item_dragged.rotation_degrees = inventory_item_dragged.rotation_degrees + 90.0
+		
 	var cursor_pos = get_global_mouse_position()
 		
 	if Input.is_action_just_pressed("inventory_grab"):
