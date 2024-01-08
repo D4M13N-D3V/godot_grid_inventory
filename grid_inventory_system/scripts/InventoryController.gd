@@ -1,7 +1,7 @@
 extends Control
 class_name InventoryController
 const ITEM_BASE = preload("res://grid_inventory_system/scenes/Item.tscn")
-
+const CONTEXT_MENU = preload("res://grid_inventory_system/scenes/ContextMenu.tscn")
 @export var inventory_open_input:String = "inventory_open"
 @export var inventory_close_input:String = "inventory_close"
 @export var inventory_use_input:String = "inventory_use"
@@ -12,17 +12,24 @@ const ITEM_BASE = preload("res://grid_inventory_system/scenes/Item.tscn")
 @export var inventory_background:Control
 @export var inventory_equipment_slots:Control
 
+
 var inventory_open = true
 var inventory_item_dragged = null
 var inventory_item_cursor_offset = Vector2()
 var inventory_item_dragged_last_container = null
 var inventory_item_dragged_last_pos = Vector2()
+var inventory_context_menu:Control = null
+var invenotry_context_menu_item:ItemConfiguration = null
+
 
 signal inventory_item_equipped(item_config,slot)
 signal inventory_item_unequipped(item_config,slot)
 signal inventory_item_dropped(item_config)
 signal inventory_item_grabbed(item_config, x, y, container)
 signal inventory_item_released(item_config, x, y, container)
+signal inventory_item_used(item_config, x, y)
+signal inventory_item_destroyed(item_config, x, y)
+signal inventory_item_opened(item_config, x, y)
 
 func _ready():
 	if(inventory_grid==null):
@@ -53,9 +60,48 @@ func _process(delta):
 		release(cursor_pos)
 		
 	if Input.is_action_just_pressed("inventory_use"):
-		use(cursor_pos)
+		try_to_open_context_menu()
+	
+	
 	if inventory_item_dragged != null:
 		inventory_item_dragged.global_position = cursor_pos + inventory_item_cursor_offset
+
+func try_to_open_context_menu():
+	var mouse_position = get_global_mouse_position()
+	var c = _get_container_mouse_over()
+	if c != null and c.has_method("grab_item"):
+		var item = c.check_item(mouse_position)
+		if item != null:
+			if(inventory_context_menu!=null):
+				inventory_context_menu.queue_free()
+			show_context_menu(mouse_position,item.item_config)
+	
+
+# Function to show the context menu at a specific position
+func show_context_menu(mouse_pos: Vector2, item: ItemConfiguration):
+	inventory_context_menu = CONTEXT_MENU.instantiate()
+	inventory_background.add_child(inventory_context_menu)
+	inventory_context_menu.global_position = mouse_pos + Vector2(-20,-15)
+	inventory_context_menu.set_use(not item.item_usable)
+	inventory_context_menu.set_drop(not item.item_droppable)
+	inventory_context_menu.set_destroy(not item.item_destroyable)
+	inventory_context_menu.set_open(not item.item_openable)
+	
+# Function to hide the context menu
+func hide_context_menu():
+	inventory_context_menu.queue_free()
+
+func context_menu_open():
+	print("OPEN!")
+	
+func context_menu_use():
+	print("USED!")
+
+func context_menu_destroy():
+	print("DESTROYED!")
+	
+func context_menu_drop():
+	print("DROPPED!")
 
 func grab(cursor_pos):
 	var c = _get_container_mouse_over()

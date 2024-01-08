@@ -12,12 +12,6 @@ func init_item(item_id):
 	graphic.pivot_offset = Vector2(graphic.size.x/2.0, graphic.size.y/2.0)
 	pivot_offset = Vector2(graphic.size.x/2.0, graphic.size.y/2.0)
 	graphic.position = Vector2()
-	graphic.position = Vector2()
-	graphic.position = Vector2()
-	graphic.position = Vector2()
-	graphic.position = Vector2()
-	graphic.position = Vector2()
-	graphic.position = Vector2()
 	print("TEST")
 
 func rotate_item(amount):

@@ -67,6 +67,12 @@ func grab_item(pos):
 	
 	inventory_item_grid_items.remove_at(inventory_item_grid_items.find(item))
 	return item
+	
+func check_item(pos):
+	var item = get_item_under_pos(pos)
+	if item == null:
+		return null
+	return item
 
 # Function to use an item from the inventory grid based on a position
 func use_item(pos):
@@ -80,7 +86,7 @@ func use_item(pos):
 		item.queue_free()
 	
 	var item_size = get_grid_size(item)
-	var item_pos = position-item.position
+	var item_pos = item.global_position-global_position
 	var g_pos = pos_to_grid_coord(item_pos)
 	inventory_item_grid_items.remove_at(inventory_item_grid_items.find(item))
 	set_grid_space(g_pos.x, g_pos.y, item_size.x, item_size.y, false)
@@ -88,10 +94,8 @@ func use_item(pos):
 # Function to convert global position to grid coordinates
 func pos_to_grid_coord(pos):
 	var results = {}
-	var testa = int(position.x / inventory_item_grid_cell_size)
-	var testb = int(position.y / inventory_item_grid_cell_size)
-	results.x = int(pos.x / inventory_item_grid_cell_size)-testa
-	results.y = int(pos.y / inventory_item_grid_cell_size)-testb	
+	results.x = int(pos.x / inventory_item_grid_cell_size)
+	results.y = int(pos.y / inventory_item_grid_cell_size)
 	return results
 
 # Function to get the grid size of an item in terms of grid cells

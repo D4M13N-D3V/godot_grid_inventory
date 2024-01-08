@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://brs6u78mwggbp"]
 
-[ext_resource type="Script" path="res://grid_inventory_system/scripts/InventoryController.gd" id="1_hmtt6"]
-[ext_resource type="Script" path="res://grid_inventory_system/scripts/InventoryGrid.gd" id="2_8imhp"]
-[ext_resource type="Script" path="res://grid_inventory_system/scripts/ItemSlot.gd" id="3_sri3o"]
-[ext_resource type="PackedScene" uid="uid://c2c7v5idagdqr" path="res://grid_inventory_system/debug/debug_ui.tscn" id="4_abx0e"]
+[ext_resource type="Script" path="res://grid_inventory_system/scripts/InventoryController.gd" id="1_pdgp8"]
+[ext_resource type="Script" path="res://grid_inventory_system/scripts/ItemSlot.gd" id="2_7s2pc"]
+[ext_resource type="Script" path="res://grid_inventory_system/scripts/InventoryGrid.gd" id="3_05dq4"]
+[ext_resource type="PackedScene" uid="uid://c2c7v5idagdqr" path="res://grid_inventory_system/debug/debug_ui.tscn" id="4_w8gq7"]
 
 [node name="Inventory" type="Control" node_paths=PackedStringArray("inventory_grid", "inventory_loot_grid", "inventory_background", "inventory_equipment_slots")]
 layout_mode = 3
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hmtt6")
+script = ExtResource("1_pdgp8")
 inventory_grid = NodePath("UI/Background/Items")
 inventory_loot_grid = NodePath("UI/Background/ColorRect/LootItems")
 inventory_background = NodePath("UI/Background")
@@ -47,7 +47,7 @@ offset_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 2
 color = Color(0.184314, 0.184314, 0.184314, 1)
-script = ExtResource("3_sri3o")
+script = ExtResource("2_7s2pc")
 
 [node name="HEAD" type="ColorRect" parent="UI/Background/Equipment"]
 layout_mode = 1
@@ -86,6 +86,7 @@ grow_vertical = 2
 color = Color(0.278431, 0.278431, 0.278431, 1)
 
 [node name="ColorRect" type="ColorRect" parent="UI/Background"]
+layout_mode = 0
 offset_left = -3.0
 offset_top = 470.0
 offset_right = 711.0
@@ -102,7 +103,7 @@ offset_right = 704.0
 offset_bottom = -14.0
 grow_vertical = 2
 color = Color(0.164706, 0.164706, 0.164706, 1)
-script = ExtResource("2_8imhp")
+script = ExtResource("3_05dq4")
 inventory_item_grid_width = 21
 inventory_item_grid_height = 7
 inventory_grid_default_color = Color(1, 1, 1, 1)
@@ -118,11 +119,11 @@ offset_right = 701.0
 offset_bottom = -8.0
 grow_vertical = 2
 color = Color(0.164706, 0.164706, 0.164706, 1)
-script = ExtResource("2_8imhp")
+script = ExtResource("3_05dq4")
 inventory_item_grid_width = 21
 inventory_item_grid_height = 14
 inventory_grid_default_color = Color(1, 1, 1, 1)
 inventory_grid_used_color = Color(0, 1, 0, 1)
 
-[node name="DEBUG" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("4_abx0e")]
+[node name="DEBUG" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("4_w8gq7")]
 inventory = NodePath("..")
