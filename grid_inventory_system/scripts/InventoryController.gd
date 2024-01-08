@@ -19,7 +19,7 @@ var inventory_item_cursor_offset = Vector2()
 var inventory_item_dragged_last_container = null
 var inventory_item_dragged_last_pos = Vector2()
 var inventory_context_menu:Control = null
-var invenotry_context_menu_item:ItemConfiguration = null
+var inventory_context_menu_item
 
 
 signal inventory_item_equipped(item_config,slot)
@@ -52,10 +52,10 @@ func _process(delta):
 		inventory_item_dragged.rotate_item(90)
 		
 	var cursor_pos = get_global_mouse_position()
-		
+	
 	if Input.is_action_just_pressed("inventory_grab"):
 		grab(cursor_pos)
-		
+			
 	if Input.is_action_just_released("inventory_grab"):
 		release(cursor_pos)
 		
@@ -74,21 +74,21 @@ func try_to_open_context_menu():
 		if item != null:
 			if(inventory_context_menu!=null):
 				inventory_context_menu.queue_free()
-			show_context_menu(mouse_position,item.item_config)
+			show_context_menu(mouse_position,item)
 		else:
 			hide_context_menu()
 	
 
 # Function to show the context menu at a specific position
-func show_context_menu(mouse_pos: Vector2, item: ItemConfiguration):
+func show_context_menu(mouse_pos: Vector2, item):
 	inventory_context_menu = CONTEXT_MENU.instantiate()
 	inventory_background.add_child(inventory_context_menu)
 	inventory_context_menu.global_position = mouse_pos + Vector2(-20,-15)
-	inventory_context_menu.set_use(not item.item_usable)
-	inventory_context_menu.set_drop(not item.item_droppable)
-	inventory_context_menu.set_destroy(not item.item_destroyable)
-	inventory_context_menu.set_open(not item.item_openable)
-	
+	inventory_context_menu.set_use(not item.item_config.item_usable)
+	inventory_context_menu.set_drop(not item.item_config.item_droppable)
+	inventory_context_menu.set_destroy(not item.item_config.item_destroyable)
+	inventory_context_menu.set_open(not item.item_config.item_openable)
+	inventory_context_menu_item = item
 # Function to hide the context menu
 func hide_context_menu():
 	if(inventory_context_menu!=null):
@@ -115,6 +115,8 @@ func grab(cursor_pos):
 			inventory_item_dragged_last_container = c
 			inventory_item_dragged_last_pos = inventory_item_dragged.global_position
 			inventory_item_cursor_offset = inventory_item_dragged.global_position - cursor_pos
+			if(inventory_context_menu_item==inventory_item_dragged):
+				release(cursor_pos)
 
 func release(cursor_pos):
 	if inventory_item_dragged == null:
