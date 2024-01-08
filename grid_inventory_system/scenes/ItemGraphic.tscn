@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtir5hovd6i3h"]
-
-[ext_resource type="Script" path="res://grid_inventory_system/scripts/ItemGraphic.gd" id="1_bih4t"]
-
-[node name="Item" type="TextureRect"]
-expand_mode = 3
-script = ExtResource("1_bih4t")

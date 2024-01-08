@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtir5hovd6i3h"]
+
+[ext_resource type="Script" path="res://grid_inventory_system/scripts/Item.gd" id="1_cs6rn"]
+[ext_resource type="Texture2D" uid="uid://bdvx58rwnaeev" path="res://icon.svg" id="2_uetec"]
+
+[node name="Item" type="Control" node_paths=PackedStringArray("graphic")]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 100.0
+offset_bottom = 100.0
+script = ExtResource("1_cs6rn")
+graphic = NodePath("Graphic")
+
+[node name="Graphic" type="TextureRect" parent="."]
+unique_name_in_owner = true
+clip_contents = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("2_uetec")
+expand_mode = 1
+
+[node name="Node" type="Node" parent="."]

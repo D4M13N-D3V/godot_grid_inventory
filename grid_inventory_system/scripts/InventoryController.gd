@@ -1,6 +1,6 @@
 extends Control
 class_name InventoryController
-const ITEM_BASE = preload("res://grid_inventory_system/scenes/ItemGraphic.tscn")
+const ITEM_BASE = preload("res://grid_inventory_system/scenes/Item.tscn")
 
 @export var inventory_open_input:String = "inventory_open"
 @export var inventory_close_input:String = "inventory_close"
@@ -40,8 +40,8 @@ func _process(delta):
 		inventory_open = false
 		inventory_background.visible=false
 		
-	#if(Input.is_action_just_pressed(inventory_rotate_input) and inventory_open==true and inventory_item_dragged != null):
-	#	inventory_item_dragged.rotation_degrees = inventory_item_dragged.rotation_degrees + 90.0
+	if(Input.is_action_just_pressed(inventory_rotate_input) and inventory_open==true and inventory_item_dragged != null):
+		inventory_item_dragged.rotate_item(90)
 		
 	var cursor_pos = get_global_mouse_position()
 		
@@ -86,10 +86,7 @@ func use(cursor_pos):
 func pickup_item(item_id):
 	var item = ITEM_BASE.instantiate()
 	item.set_meta("id", item_id)
-	var dbItem = ItemDb.get_item(item_id)
-	item.item_config = dbItem
-	item.set_size(Vector2(dbItem.item_size.x, dbItem.item_size.y))
-	item.texture = dbItem.item_texture
+	item.init_item(item_id)
 	if not inventory_grid.insert_item_at_first_available_spot(item):
 		item.queue_free()
 		return false
