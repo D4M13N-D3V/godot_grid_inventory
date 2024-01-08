@@ -100,4 +100,5 @@ inventory_item_grid_height = 14
 inventory_grid_default_color = Color(1, 1, 1, 1)
 inventory_grid_used_color = Color(0, 1, 0, 1)
 
-[node name="DEBUG" parent="." instance=ExtResource("4_abx0e")]
+[node name="DEBUG" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("4_abx0e")]
+inventory = NodePath("..")
