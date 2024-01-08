@@ -1,47 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2c7v5idagdqr"]
+[gd_scene load_steps=3 format=3 uid="uid://c2c7v5idagdqr"]
 
 [ext_resource type="Script" path="res://debug.gd" id="1_qtffx"]
 
-[node name="DEBUG" type="Node"]
+[sub_resource type="GDScript" id="GDScript_fqjhy"]
+
+[node name="DEBUG" type="Node" node_paths=PackedStringArray("grid")]
 script = ExtResource("1_qtffx")
+grid = NodePath("Items/GridContainer")
 
-[node name="Button" type="Button" parent="."]
-offset_left = 493.0
-offset_top = 112.0
-offset_right = 653.0
-offset_bottom = 143.0
-text = "GIVE LARGE  ITEM"
+[node name="Items" type="ScrollContainer" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 228.0
+grow_vertical = 2
+script = SubResource("GDScript_fqjhy")
 
-[node name="Button4" type="Button" parent="."]
-offset_left = 672.0
-offset_top = 151.0
-offset_right = 832.0
-offset_bottom = 182.0
-text = "GIVE SHIRT"
-
-[node name="Button5" type="Button" parent="."]
-offset_left = 673.0
-offset_top = 110.0
-offset_right = 833.0
-offset_bottom = 141.0
-text = "GIVE HAT"
-
-[node name="Button2" type="Button" parent="."]
-offset_left = 496.0
-offset_top = 149.0
-offset_right = 653.0
-offset_bottom = 180.0
-text = "GIVE MEDIUM ITEM"
-
-[node name="Button3" type="Button" parent="."]
-offset_left = 498.0
-offset_top = 186.0
-offset_right = 656.0
-offset_bottom = 217.0
-text = "GIVE SMALL  ITEM"
-
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
-[connection signal="pressed" from="Button5" to="." method="_on_button_5_pressed"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[node name="GridContainer" type="GridContainer" parent="Items"]
+unique_name_in_owner = true
+layout_mode = 2
