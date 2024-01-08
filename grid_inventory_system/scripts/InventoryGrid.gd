@@ -37,7 +37,7 @@ func _ready():
 
 # Function to insert an item into the inventory grid
 func insert_item(item):
-	var item_pos = item.position
+	var item_pos = item.global_position-global_position
 	var g_pos = pos_to_grid_coord(item_pos)
 	var item_size = get_grid_size(item)
 	
@@ -45,6 +45,9 @@ func insert_item(item):
 	if is_grid_space_available(g_pos.x, g_pos.y, item_size.x, item_size.y)==true:
 		set_grid_space(g_pos.x, g_pos.y, item_size.x, item_size.y, true)
 		item.position = Vector2(g_pos.x, g_pos.y) * inventory_item_grid_cell_size
+		var parent = item.get_parent()
+		if(parent!=null):
+			parent.remove_child(item)
 		add_child(item)
 		inventory_item_grid_items.append(item)
 		return true
@@ -77,7 +80,7 @@ func use_item(pos):
 		item.queue_free()
 	
 	var item_size = get_grid_size(item)
-	var item_pos = item.position
+	var item_pos = position-item.position
 	var g_pos = pos_to_grid_coord(item_pos)
 	inventory_item_grid_items.remove_at(inventory_item_grid_items.find(item))
 	set_grid_space(g_pos.x, g_pos.y, item_size.x, item_size.y, false)
@@ -85,8 +88,10 @@ func use_item(pos):
 # Function to convert global position to grid coordinates
 func pos_to_grid_coord(pos):
 	var results = {}
-	results.x = int(pos.x / inventory_item_grid_cell_size)
-	results.y = int(pos.y / inventory_item_grid_cell_size)
+	var testa = int(position.x / inventory_item_grid_cell_size)
+	var testb = int(position.y / inventory_item_grid_cell_size)
+	results.x = int(pos.x / inventory_item_grid_cell_size)-testa
+	results.y = int(pos.y / inventory_item_grid_cell_size)-testb	
 	return results
 
 # Function to get the grid size of an item in terms of grid cells

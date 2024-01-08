@@ -1,4 +1,5 @@
 extends ColorRect
+class_name ItemSlot
 
 # Reference to child slots
 @onready var slots = get_children()

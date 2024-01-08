@@ -8,6 +8,7 @@ const ITEM_BASE = preload("res://grid_inventory_system/scenes/Item.tscn")
 @export var inventory_grab_input:String = "inventory_grab"
 @export var inventory_rotate_input:String = "inventory_rotate"
 @export var inventory_grid:Control
+@export var inventory_loot_grid:Control
 @export var inventory_background:Control
 @export var inventory_equipment_slots:Control
 
@@ -107,6 +108,8 @@ func _get_container_mouse_over():
 	
 	if(_is_mouse_ontop_of_control(inventory_grid)==true):
 		return inventory_grid
+	elif(_is_mouse_ontop_of_control(inventory_loot_grid)==true):
+		return inventory_loot_grid
 	elif(_is_mouse_ontop_of_control(inventory_equipment_slots)==true):
 		return inventory_equipment_slots
 	elif(_is_mouse_ontop_of_control(inventory_background)==true):

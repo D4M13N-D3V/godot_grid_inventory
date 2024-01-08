@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://grid_inventory_system/scripts/InventoryController.gd" id="1_hmtt6"]
 [ext_resource type="Script" path="res://grid_inventory_system/scripts/InventoryGrid.gd" id="2_8imhp"]
-[ext_resource type="Script" path="res://grid_inventory_system/scripts/ItemEquipmentSlots.gd" id="3_sri3o"]
+[ext_resource type="Script" path="res://grid_inventory_system/scripts/ItemSlot.gd" id="3_sri3o"]
 [ext_resource type="PackedScene" uid="uid://c2c7v5idagdqr" path="res://grid_inventory_system/debug/debug_ui.tscn" id="4_abx0e"]
 
-[node name="Inventory" type="Control" node_paths=PackedStringArray("inventory_grid", "inventory_background", "inventory_equipment_slots")]
+[node name="Inventory" type="Control" node_paths=PackedStringArray("inventory_grid", "inventory_loot_grid", "inventory_background", "inventory_equipment_slots")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hmtt6")
 inventory_grid = NodePath("UI/Background/Items")
+inventory_loot_grid = NodePath("UI/Background/ColorRect/LootItems")
 inventory_background = NodePath("UI/Background")
 inventory_equipment_slots = NodePath("UI/Background/Equipment")
 
@@ -26,9 +27,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -473.5
-offset_top = -235.5
+offset_top = -462.0
 offset_right = 473.5
-offset_bottom = 235.5
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.121569, 0.121569, 0.121569, 1)
@@ -83,6 +84,29 @@ offset_right = 227.5
 offset_bottom = 194.0
 grow_vertical = 2
 color = Color(0.278431, 0.278431, 0.278431, 1)
+
+[node name="ColorRect" type="ColorRect" parent="UI/Background"]
+offset_left = -3.0
+offset_top = 470.0
+offset_right = 711.0
+offset_bottom = 717.0
+color = Color(0.105882, 0.105882, 0.105882, 0.905882)
+
+[node name="LootItems" type="ColorRect" parent="UI/Background/ColorRect"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 8.0
+offset_right = 704.0
+offset_bottom = -14.0
+grow_vertical = 2
+color = Color(0.164706, 0.164706, 0.164706, 1)
+script = ExtResource("2_8imhp")
+inventory_item_grid_width = 21
+inventory_item_grid_height = 7
+inventory_grid_default_color = Color(1, 1, 1, 1)
+inventory_grid_used_color = Color(0, 1, 0, 1)
 
 [node name="Items" type="ColorRect" parent="UI/Background"]
 layout_mode = 1
