@@ -75,6 +75,8 @@ func try_to_open_context_menu():
 			if(inventory_context_menu!=null):
 				inventory_context_menu.queue_free()
 			show_context_menu(mouse_position,item.item_config)
+		else:
+			hide_context_menu()
 	
 
 # Function to show the context menu at a specific position
@@ -89,7 +91,8 @@ func show_context_menu(mouse_pos: Vector2, item: ItemConfiguration):
 	
 # Function to hide the context menu
 func hide_context_menu():
-	inventory_context_menu.queue_free()
+	if(inventory_context_menu!=null):
+		inventory_context_menu.queue_free()
 
 func context_menu_open():
 	print("OPEN!")
