@@ -53,7 +53,7 @@ func _process(delta):
 		
 	var cursor_pos = get_global_mouse_position()
 	
-	if Input.is_action_just_pressed("inventory_grab"):
+	if Input.is_action_just_pressed("inventory_grab"):	
 		grab(cursor_pos)
 			
 	if Input.is_action_just_released("inventory_grab"):
@@ -92,6 +92,7 @@ func show_context_menu(mouse_pos: Vector2, item):
 # Function to hide the context menu
 func hide_context_menu():
 	if(inventory_context_menu!=null):
+		inventory_context_menu_item=null
 		inventory_context_menu.queue_free()
 
 func context_menu_open():
