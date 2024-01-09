@@ -135,13 +135,15 @@ func get_item_under_pos(pos):
 		if item.get_global_rect().has_point(pos):
 			return item
 	return null
-
+# Function to insert an item at the first available spot in the grid
 # Function to insert an item at the first available spot in the grid
 func insert_item_at_first_available_spot(item):
-	for x in inventory_item_grid_width:
-		for y in inventory_item_grid_height:
-			if not inventory_item_grid[x][y]["used"]:
-				item.global_position =  Vector2(x* inventory_item_grid_cell_size, (y)* inventory_item_grid_cell_size) 
-				if insert_item(item)==true:
+	for x in range(inventory_item_grid_width):
+		for y in range(inventory_item_grid_height):
+			if inventory_item_grid[x][y]["used"] == false:
+				item.global_position = global_position+ Vector2(x * inventory_item_grid_cell_size, y * inventory_item_grid_cell_size)
+				if insert_item(item) == true:
+					print("Item inserted at:", item.position)
 					return true
 	return false
+
