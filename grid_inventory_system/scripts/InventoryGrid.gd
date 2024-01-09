@@ -3,7 +3,7 @@ class_name InventoryItemGrid
 
 # Arrays to store inventory items and the grid representation
 var inventory_item_grid_items = []
-
+@export var inventory_grid_name = "default"
 # 2D dictionary to represent the inventory grid, where each cell has information about usage and a corresponding ColorRect node
 var inventory_item_grid = {}
 var inventory_item_grid_cell_size = 32
@@ -50,6 +50,7 @@ func insert_item(item):
 			parent.remove_child(item)
 		add_child(item)
 		inventory_item_grid_items.append(item)
+		InventoryManager.emit_signal("inventory_item_picked_up", inventory_grid_name, g_pos.x, g_pos.y, item_pos.x, item_pos.y, item)
 		return true
 	else:
 		return false

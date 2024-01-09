@@ -4,7 +4,7 @@ class_name ItemGraphic
 @export var graphic:TextureRect
 
 func init_item(item_id):
-	var dbItem = ItemDb.get_item(item_id)
+	var dbItem = InventoryManager.get_item(item_id)
 	item_config = dbItem
 	graphic.set_size(Vector2(dbItem.item_size.x, dbItem.item_size.y))
 	set_size(Vector2(dbItem.item_size.x, dbItem.item_size.y))

@@ -28,7 +28,7 @@ func insert_item(item):
 		return false
 
 	# Retrieve item slot information from the ItemDb
-	var item_slot = ItemDb.get_item(item.get_meta("id")).item_equipment_slot
+	var item_slot = InventoryManager.get_item(item.get_meta("id")).item_equipment_slot
 	# Check if the item's slot matches the target slot
 	if item_slot != slot.name:
 		return false
@@ -49,8 +49,8 @@ func grab_item(pos):
 	if item == null:
 		return null
 
-	# Retrieve item slot information from the ItemDb
-	var item_slot = ItemDb.get_item(item.get_meta("id")).item_equipment_slot
+	# Retrieve item slot information from the InventoryManager
+	var item_slot = InventoryManager.get_item(item.get_meta("id")).item_equipment_slot
 	# Remove the item from the slot and emit the weapon_unequipped signal
 	items[item_slot] = null
 	weapon_unequipped.emit(item.item_config.item_id, item.item_config)
