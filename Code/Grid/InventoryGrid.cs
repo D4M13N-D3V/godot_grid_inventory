@@ -5,29 +5,36 @@ using GodotGridInventory.Code.Grid.Enums;
 
 namespace GodotGridInventory.Code.Grid;
 
+#nullable enable
 public class InventoryGrid
 {
-    private readonly int _gridWidth;
-    private readonly int _gridHeight;
+    private readonly InventoryController _inventoryController;
+    public readonly Vector2 GridSize;
     
-    private readonly List<InventoryCell> _gridCells = new();
+    public List<InventoryCell> GridCells = new();
     
-    public InventoryGrid(int width, int height)
+    public InventoryGrid(InventoryController inventoryController, Vector2 size)
     {
-        _gridWidth = width;
-        _gridHeight = height;
+        _inventoryController = inventoryController;
+        GridSize = size;
         InitializeGrid();
+    }
+    
+    public InventoryGrid(InventoryController inventoryController, List<InventoryCell> gridCells)
+    {
+        _inventoryController = inventoryController;
+        GridCells = gridCells;
     }
 
     private void InitializeGrid()
     {
-        for(var x = 0; x < _gridWidth; x++)
+        for(var x = 0; x < GridSize.X; x++)
         {
-            for(var y = 0; y < _gridHeight; y++)
+            for(var y = 0; y < GridSize.Y; y++)
             {
                 var cellPosition = new Vector2(x, y);
                 var cell = new InventoryCell(cellPosition, this);
-                _gridCells.Add(cell);
+                GridCells.Add(cell);
             }
         }
     }
@@ -38,9 +45,9 @@ public class InventoryGrid
     /// </summary>
     /// <param name="position">The position of the cell to update.</param>
     /// <param name="item">The item to set the cell to.</param>
-    private void SetCellItem(Vector2 position, ItemConfiguration item)
+    private void SetCellItem(Vector2 position, Item item)
     {
-        var cell = _gridCells.FirstOrDefault(cell => cell.Position == position);
+        var cell = GridCells.FirstOrDefault(cell => cell.Position == position);
         if(cell != null)
         {
             cell.Item = item;
@@ -53,7 +60,7 @@ public class InventoryGrid
     /// <param name="position">The position of the cell to update.</param>
     private void ClearCellItem(Vector2 position)
     {
-        var cell = _gridCells.FirstOrDefault(cell => cell.Position == position);
+        var cell = GridCells.FirstOrDefault(cell => cell.Position == position);
         if(cell != null)
         {
             cell.Item = null;
@@ -67,7 +74,7 @@ public class InventoryGrid
     /// <param name="state">The state to set the cell</param>
     private void SetCellState(Vector2 position, EnumInventoryGridCellState state)
     {
-        var cell = _gridCells.FirstOrDefault(cell => cell.Position == position);
+        var cell = GridCells.FirstOrDefault(cell => cell.Position == position);
         if(cell != null)
         {
             cell.State = state;
@@ -82,7 +89,7 @@ public class InventoryGrid
     /// <param name="state">The state to set the cells</param>
     private void SetCellAreaState(Vector2 position, Vector2 size, EnumInventoryGridCellState state)
     {
-        foreach (var cell in _gridCells.Where(cell => cell.Position.X >= position.X && cell.Position.X < position.X + size.X && cell.Position.Y >= position.Y && cell.Position.Y < position.Y + size.Y))
+        foreach (var cell in GridCells.Where(cell => cell.Position.X >= position.X && cell.Position.X < position.X + size.X && cell.Position.Y >= position.Y && cell.Position.Y < position.Y + size.Y))
         {
             cell.State = state;
         }
@@ -95,16 +102,16 @@ public class InventoryGrid
     /// <returns>The first coordinates available for something of the given size, or null if no space available.</returns>
     private Vector2? GetAvailableCellPosition(Vector2 size)
     {
-        var availableCells = _gridCells.Where(cell => cell.State == EnumInventoryGridCellState.Available);
+        var availableCells = GridCells.Where(cell => cell.State == EnumInventoryGridCellState.Available);
         var cell = availableCells.FirstOrDefault();
         if(cell != null)
         {
             return cell.Position;
         }
         
-        for (int x = 0; x <= _gridWidth - size.X; x++)
+        for (int x = 0; x <= GridSize.X - size.X; x++)
         {
-            for (int y = 0; y <= _gridHeight - size.Y; y++)
+            for (int y = 0; y <= GridSize.Y - size.Y; y++)
             {
                 // Check if the area is available
                 if (IsSpaceAvailable(new Vector2(x, y), size))
@@ -125,7 +132,7 @@ public class InventoryGrid
     /// <returns>A List of cells that are available for the item to be placed in.</returns>
     private bool IsSpaceAvailable(Vector2 position, Vector2 size)
     {
-        var cells = _gridCells.Where( cell => cell.Position.X >= position.X && cell.Position.X < position.X + size.X && cell.Position.Y >= position.Y && cell.Position.Y < position.Y + size.Y);
+        var cells = GridCells.Where( cell => cell.Position.X >= position.X && cell.Position.X < position.X + size.X && cell.Position.Y >= position.Y && cell.Position.Y < position.Y + size.Y);
         return cells.All(cell => cell.State == EnumInventoryGridCellState.Available);
     }
     #endregion
@@ -138,7 +145,7 @@ public class InventoryGrid
     /// <param name="itemId">The ID of the item to add.</param>
     /// <param name="position">The position to add the item at in inventory grid space. If null then will insert at first available place.</param>
     /// <returns></returns>
-    public bool AddItem(string itemId, Vector2? position)
+    public bool AddItem(string itemId, Vector2? position = null)
     {
         var item = ItemDatabase.Instance.GetItemConfiguration(itemId);
         if(item == null)
@@ -166,10 +173,10 @@ public class InventoryGrid
     /// Gets the cell at the given location in inventory grid space.
     /// </summary>
     /// <param name="position">The position you want to get the cell of.</param>
-    /// <returns>The inventory cell.</returns>
+    /// <returns>The inventory cell at the given location in inventory grid space.</returns>
     public InventoryCell? GetCell(Vector2 position)
     {
-        return _gridCells.FirstOrDefault(cell => cell.Position == position);
+        return GridCells.FirstOrDefault(cell => cell.Position == position);
     }
     #endregion
     

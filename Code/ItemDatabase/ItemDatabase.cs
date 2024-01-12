@@ -7,11 +7,14 @@ namespace GodotGridInventory.Code;
 public class ItemDatabase
 {
     public static ItemDatabase Instance { get; } = new();
-    private readonly Dictionary<string, ItemConfiguration> _itemDatabase = new();
+    private readonly Dictionary<string, Item> _itemDatabase = new();
     
+    public ItemDatabase()
+    {
+        InitializeItemDatabase();
+    }   
     
-    
-    public ItemConfiguration GetItemConfiguration(string id)
+    public Item GetItemConfiguration(string id)
     {
         return _itemDatabase[id];
     }
@@ -22,7 +25,7 @@ public class ItemDatabase
         var items = DirAccess.GetFilesAt(ItemDatabaseConstants.ITEMS_PATH).Where(filePath => filePath.EndsWith(ItemDatabaseConstants.ITEM_EXTENSION));
         foreach (var item in items)
         {
-            var itemResource = GD.Load<ItemConfiguration>(item);
+            var itemResource = GD.Load<Item>(item);
             if (itemResource != null)
             {
                 _itemDatabase.Add(itemResource.Id, itemResource);

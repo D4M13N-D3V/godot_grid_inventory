@@ -3,7 +3,7 @@ using System;
 using GodotGridInventory.Code.Items.Enums;
 
 [GlobalClass, Icon("res://icon.svg")]
-public partial class ItemConfiguration : Resource
+public partial class Item : Resource
 {
     [Export] public string Id { get; set; }
     [Export] public string Name { get; set; }
