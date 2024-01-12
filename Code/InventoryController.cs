@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -58,7 +59,11 @@ public partial class InventoryController : Node
             Name = name,
             Items = items.Select( item=> _itemDatabase.GetItemConfiguration(item)).ToList(),
             Cells = inventoryGrid.GridCells,
-            Open = false
+            Open = false,
+            Grid = inventoryGrid,
+            GridInterface = null,
+            GridWidth = (int)Math.Round(size.X),
+            GridHeight = (int)Math.Round(size.Y)
         });
         
         _inventoryIdCounter++;
