@@ -161,6 +161,16 @@ public class InventoryGrid
         SetCellAreaState((Vector2)position, item.Size, EnumInventoryGridCellState.Unavailable);
         return true;
     }
+    
+    /// <summary>
+    /// Gets the cell at the given location in inventory grid space.
+    /// </summary>
+    /// <param name="position">The position you want to get the cell of.</param>
+    /// <returns>The inventory cell.</returns>
+    public InventoryCell? GetCell(Vector2 position)
+    {
+        return _gridCells.FirstOrDefault(cell => cell.Position == position);
+    }
     #endregion
     
 }
