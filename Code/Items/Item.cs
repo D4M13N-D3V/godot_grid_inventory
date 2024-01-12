@@ -10,6 +10,7 @@ public partial class Item : Resource
     [Export] public string Description { get; set; }
     [Export] public Vector2 Size { get; set; }
     [Export] public Texture2D Texture { get; set; }
-    [Export] public EnumItemActions Actions { get; set; }
+    [Export] public EnumItemFlags Flags { get; set; }
     [Export] public string[] Slots { get; set; }
+    [Export] public string[] Tags { get; set; }
 }
