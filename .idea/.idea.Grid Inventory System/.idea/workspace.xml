@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b9d65472-d9a7-4eff-9052-6bfc4feb9ff9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/debug.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/debug/debug_ui.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/debug/hat.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/debug/hat.png.import" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/debug/shirt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/debug/shirt.png.import" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/items/body.tres" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/items/head.tres" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/items/large_debug_item.tres" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/items/medium_debug_item.tres" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/items/small_debug_item.tres" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/items/weapon.tres" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scenes/ContextMenu.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scenes/Inventory.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scenes/InventorySlot.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scenes/Item.tscn" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/ContextMenu.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/InventoryController.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/InventoryGrid.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/InventorySlot.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/Item.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/ItemConfiguration.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/ItemDB.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/grid_inventory_system/scripts/ItemSlot.gd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icon.svg.import" beforeDir="false" afterPath="$PROJECT_DIR$/icon.svg.import" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project.godot" beforeDir="false" afterPath="$PROJECT_DIR$/project.godot" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2amytOwRHFk0dOiEf8NQEHEAn2s" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Executable.Editor.executor": "Run",
+    ".NET Executable.Player.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "9-setup-project-for-c-development-and-refactor-existing-systems",
+    "last_opened_file_path": "/home/damienostler/Documents/GoDot/godot_grid_inventory",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/home/damienostler/.config/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
+      "/home/damienostler/.config/JetBrains/Rider2023.3/resharper-host/SourcesCache",
+      "/home/damienostler/.local/share/Symbols/src"
+    ]
+  }
+}]]></component>
+  <component name="RunManager" selected=".NET Executable.Player">
+    <configuration name="Editor" type="RunExe" factoryName=".NET Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;$PROJECT_DIR$&quot; --editor" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="RUNTIME_TYPE" value="coreclr" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Player" type="RunExe" factoryName=".NET Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/Godot_v4.2.1-stable_mono_linux_x86_64/Godot_v4.2.1-stable_mono_linux.x86_64" />
+      <option name="PROGRAM_PARAMETERS" value="--path &quot;$PROJECT_DIR$&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="RUNTIME_TYPE" value="coreclr" />
+      <method v="2">
+        <option name="Build Solution" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b9d65472-d9a7-4eff-9052-6bfc4feb9ff9" name="Changes" comment="" />
+      <created>1704938262746</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704938262746</updated>
+      <workItem from="1704938264449" duration="187000" />
+      <workItem from="1704938510358" duration="299000" />
+      <workItem from="1704938819194" duration="3296000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
