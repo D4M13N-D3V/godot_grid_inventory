@@ -28,7 +28,9 @@ public partial class InventoryController : Control
         _inventoryUI = InventoryUIResource.Instantiate() as Inventory;
         _inventoryUI.InitializeInventory(this);
         AddChild(_inventoryUI);
-        AddInventory("Player Inventory", new Vector2(10, 10), new string[] {"item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small"});
+        AddInventory("Player Inventory", new Vector2(0,0),new Vector2(10, 10), new string[] {"item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small"});
+        AddInventory("Second Inventory", new Vector2(500,0),new Vector2(10, 10), new string[] {"item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small"});
+
         base._Ready();
     }
     
@@ -66,11 +68,12 @@ public partial class InventoryController : Control
         return result;
     }
     
-    public void AddInventory(string name, Vector2 size, string[] items)
+    public void AddInventory(string name, Vector2 position, Vector2 size, string[] items)
     {
         var inventoryGrid = new InventoryGrid(this, size);
         var gridInterface = InventoryGridUIResource.Instantiate() as UI.InventoryGrid;
         _inventoryUI.AddChild(gridInterface);
+        gridInterface.GlobalPosition = position;
         gridInterface.InitializeInventoryGrid(inventoryGrid, this);
         var itemGraphics = new List<InventoryGridItem>();
         _inventories.Add(_inventoryIdCounter, new InventoryModel()
