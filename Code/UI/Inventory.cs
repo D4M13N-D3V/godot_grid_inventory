@@ -119,7 +119,7 @@ public partial class Inventory: Control
             Grab(cursor_pos);
         }
 			
-        if (Input.IsActionJustReleased(InventoryDragActionName) && _inventoryItemDragged == null)
+        if (Input.IsActionJustReleased(InventoryDragActionName) && _inventoryItemDragged != null)
         {
             Release(cursor_pos);
         }
