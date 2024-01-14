@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://co3o3ra1efr45"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rtlwt"]
+
+[node name="InventoryGridSlot" type="TextureRect"]
+offset_right = 25.0
+offset_bottom = 25.0
+texture = SubResource("PlaceholderTexture2D_rtlwt")

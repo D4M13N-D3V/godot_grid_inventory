@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxmeyjh8klieh"]
+
+[ext_resource type="Script" path="res://Code/UI/InventoryGridItem.cs" id="1_wwufo"]
+[ext_resource type="Texture2D" uid="uid://bj3tjdbw5xdlj" path="res://icon.svg" id="2_vmwaj"]
+
+[node name="InventoryItem" type="Control" node_paths=PackedStringArray("Texture")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wwufo")
+Texture = NodePath("InventoryItemGraphic")
+
+[node name="InventoryItemGraphic" type="TextureRect" parent="."]
+layout_mode = 0
+texture = ExtResource("2_vmwaj")
+expand_mode = 1

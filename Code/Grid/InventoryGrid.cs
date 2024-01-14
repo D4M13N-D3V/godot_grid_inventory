@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using GodotGridInventory.Code.Grid.Enums;
+using GodotGridInventory.Code.UI;
 
 namespace GodotGridInventory.Code.Grid;
 
@@ -89,9 +90,30 @@ public class InventoryGrid
     /// <param name="state">The state to set the cells</param>
     private void SetCellAreaState(Vector2 position, Vector2 size, EnumInventoryGridCellState state)
     {
-        foreach (var cell in GridCells.Where(cell => cell.Position.X >= position.X && cell.Position.X < position.X + size.X && cell.Position.Y >= position.Y && cell.Position.Y < position.Y + size.Y))
+        var cells = GridCells.Where(cell =>
+            cell.Position.X >= position.X && cell.Position.X < position.X + size.X && cell.Position.Y >= position.Y &&
+            cell.Position.Y < position.Y + size.Y).ToList();
+        foreach (var cell in cells)
         {
             cell.State = state;
+        }
+    }
+    
+    /// <summary>
+    /// Sets the item of a selection of cells at a given position and size in inventory grid space.
+    /// </summary>
+    /// <param name="position">The position of the cells to set from the top left..</param>
+    /// <param name="size">The size of the area to set starting at the top left.</param>
+    /// <param name="item">The item to set the cells</param>
+    private void SetCellAreaItem(Vector2 position, Vector2 size, Item item, InventoryGridItem itemGraphic)
+    {
+        var cells = GridCells.Where(cell =>
+            cell.Position.X >= position.X && cell.Position.X < position.X + size.X && cell.Position.Y >= position.Y &&
+            cell.Position.Y < position.Y + size.Y).ToList();
+        foreach (var cell in cells)
+        {
+            cell.Item = item;
+            cell.ItemGraphic = itemGraphic;
         }
     }
     
@@ -102,13 +124,6 @@ public class InventoryGrid
     /// <returns>The first coordinates available for something of the given size, or null if no space available.</returns>
     private Vector2? GetAvailableCellPosition(Vector2 size)
     {
-        var availableCells = GridCells.Where(cell => cell.State == EnumInventoryGridCellState.Available);
-        var cell = availableCells.FirstOrDefault();
-        if(cell != null)
-        {
-            return cell.Position;
-        }
-        
         for (int x = 0; x <= GridSize.X - size.X; x++)
         {
             for (int y = 0; y <= GridSize.Y - size.Y; y++)
@@ -145,13 +160,13 @@ public class InventoryGrid
     /// <param name="itemId">The ID of the item to add.</param>
     /// <param name="position">The position to add the item at in inventory grid space. If null then will insert at first available place.</param>
     /// <returns></returns>
-    public bool AddItem(string itemId, Vector2? position = null)
+    public Vector2? AddItem(string itemId, InventoryGridItem itemGraphic, Vector2? position = null)
     {
         var item = ItemDatabase.Instance.GetItemConfiguration(itemId);
         if(item == null)
         {
             GD.PrintErr("Attempted to add item with id " + itemId + ", which does not exist.");
-            return false;
+            return null;
         }
         
         if(position.HasValue==false)
@@ -162,11 +177,12 @@ public class InventoryGrid
         if (position.HasValue==false)
         {
             GD.PrintErr("Attempted to add item with id " + itemId + ", but there is no space available.");
-            return false;
+            return null;
         }
         
         SetCellAreaState((Vector2)position, item.Size, EnumInventoryGridCellState.Unavailable);
-        return true;
+        SetCellAreaItem((Vector2)position, item.Size, item, itemGraphic);
+        return position;
     }
     
     /// <summary>

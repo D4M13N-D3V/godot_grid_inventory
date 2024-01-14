@@ -2,8 +2,8 @@ using Godot;
 using GodotGridInventory.Code.Grid;
 
 namespace GodotGridInventory.Code.UI;
-
-public class Inventory: Control
+    
+public partial class Inventory: Control
 {
     private InventoryGridItem _inventoryItemDragged = null;
     private Vector2 _inventoryItemCursorOffset = Vector2.Zero;
@@ -11,9 +11,9 @@ public class Inventory: Control
     private Vector2 _inventoryItemDraggedLastPos = Vector2.Zero;
     private InventoryController _inventoryController;
     
-    [Export] public string InventoryDragActionName = "inventory_drag";
-    [Export] public string InventoryDropActionName = "inventory_release";
-    [Export] public string InventoryRotateActionName = "inventory_rotate";
+    [Export] public string InventoryDragActionName { get; set; } = "inventory_drag";
+    [Export] public string InventoryDropActionName { get; set; } = "inventory_release";
+    [Export] public string InventoryRotateActionName { get; set; } = "inventory_rotate";
     
     
     #region Private Methods
@@ -21,6 +21,8 @@ public class Inventory: Control
     private InventoryModel GetInventoryUnderCursor(Vector2 cursor_pos)
     {
         GD.Print("Checking for inventory under cursor.");
+        if(_inventoryController== null)
+            return null;
         foreach (var inventory in _inventoryController.GetInventoriesLoaded())
         {
             if (inventory.GridInterface.GetGlobalRect().HasPoint(cursor_pos))
@@ -36,17 +38,33 @@ public class Inventory: Control
 
     private void Grab(Vector2 cursorPos)
     {
+        GD.Print("Grabbing item.");
         var inventory = GetInventoryUnderCursor(cursorPos);
         if (inventory != null)
         {
-            var inventoryItem = inventory.Grid?.GetCell(cursorPos).ItemGraphic;
+            GD.Print("Inventory found under cursor.");
+            var inventoryItem = inventory.Grid?.GetCell(inventory.GridInterface.ScreenCoordsToInventoryGridCoords(cursorPos))?.ItemGraphic;
             if (inventoryItem != null)
             {
+                GD.Print("Inventory item found under cursor.");
                 _inventoryItemDragged = inventoryItem;
                 _inventoryItemDraggedLastContainer = inventory.GridInterface;
                 _inventoryItemDraggedLastPos = _inventoryItemDragged.GlobalPosition;
+                var parent = _inventoryItemDragged.GetParent();
+                if(parent!=null)
+                    parent.RemoveChild(_inventoryItemDragged);
+                AddChild(_inventoryItemDragged);
                 _inventoryItemCursorOffset = _inventoryItemDragged.GlobalPosition - cursorPos;
+                GD.Print("Inventory item grabbed.");
             }
+            else
+            {
+                GD.Print("Inventory item not found under cursor.");
+            }
+        }
+        else
+        {
+            GD.Print("Inventory not found under cursor.");
         }
     }
     
@@ -61,6 +79,7 @@ public class Inventory: Control
             ReturnItem();
             return;
         }
+        ReturnItem();
     }
 
     private void ReturnItem()
@@ -95,15 +114,21 @@ public class Inventory: Control
 
         var cursor_pos = GetGlobalMousePosition();
 	
-        if (Input.IsActionJustPressed(InventoryDragActionName))
+        if (Input.IsActionJustPressed(InventoryDragActionName) && _inventoryItemDragged == null)
         {
             Grab(cursor_pos);
         }
 			
-        if (Input.IsActionJustReleased(InventoryDragActionName))
+        if (Input.IsActionJustReleased(InventoryDragActionName) && _inventoryItemDragged == null)
         {
             Release(cursor_pos);
         }
+
+        if (_inventoryItemDragged != null)
+        {
+            _inventoryItemDragged.GlobalPosition = cursor_pos + _inventoryItemCursorOffset;
+        }
+        
         base._Process(delta);
     }
     #endregion

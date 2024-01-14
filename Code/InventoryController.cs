@@ -15,9 +15,22 @@ public partial class InventoryController : Control
     private readonly ItemDatabase _itemDatabase = ItemDatabase.Instance;
     
     private int _inventoryIdCounter = 0;
+    private Inventory _inventoryUI;
     #endregion
     
     [Export] public float CellSize { get; set; } = 25;
+    [Export] public PackedScene InventoryUIResource { get; set; }
+    [Export] public PackedScene InventoryGridUIResource { get; set; }
+    [Export] public PackedScene InventoryGridItemUIResource { get; set; }
+    
+    public override void _Ready()
+    {
+        _inventoryUI = InventoryUIResource.Instantiate() as Inventory;
+        _inventoryUI.InitializeInventory(this);
+        AddChild(_inventoryUI);
+        AddInventory("Player Inventory", new Vector2(10, 10), new string[] {"item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small","item_small"});
+        base._Ready();
+    }
     
     #region Public Methods
     public List<InventoryModel> GetInventoriesLoaded()
@@ -56,12 +69,10 @@ public partial class InventoryController : Control
     public void AddInventory(string name, Vector2 size, string[] items)
     {
         var inventoryGrid = new InventoryGrid(this, size);
-        
-        foreach (var item in items)
-        {
-            inventoryGrid.AddItem(item);
-        }
-        
+        var gridInterface = InventoryGridUIResource.Instantiate() as UI.InventoryGrid;
+        _inventoryUI.AddChild(gridInterface);
+        gridInterface.InitializeInventoryGrid(inventoryGrid, this);
+        var itemGraphics = new List<InventoryGridItem>();
         _inventories.Add(_inventoryIdCounter, new InventoryModel()
         {
             Id = _inventoryIdCounter,
@@ -70,11 +81,19 @@ public partial class InventoryController : Control
             Cells = inventoryGrid.GridCells,
             Open = false,
             Grid = inventoryGrid,
-            GridInterface = null,
+            GridInterface = gridInterface,
             GridWidth = (int)Math.Round(size.X),
             GridHeight = (int)Math.Round(size.Y)
         });
-        
+        foreach (var item in items)
+        {
+            var itemConfig = _itemDatabase.GetItemConfiguration(item);
+            var itemGraphic = InventoryGridItemUIResource.Instantiate() as InventoryGridItem;
+            itemGraphic.InitializeItem(itemConfig, this);
+            gridInterface.AddItem(itemGraphic,false);
+            itemGraphics.Add(itemGraphic);
+        }
+
         _inventoryIdCounter++;
     }
 
@@ -86,7 +105,7 @@ public partial class InventoryController : Control
             GD.PrintErr($"Inventory not found with id {Id}.");
             return false;
         }
-
+        inventory.GridInterface.QueueFree();
         _inventories.Remove(Id);
         GD.Print($"Inventory {inventory.Name} with id {inventory.Id} removed.");
         return true;
@@ -135,10 +154,6 @@ public partial class InventoryController : Control
     #endregion
     private Dictionary<int,InventoryModel> _inventories { get; set; } = new Dictionary<int,InventoryModel>();
     
-    public override void _Ready()
-    {
-        base._Ready();
-    }
 
 
 }

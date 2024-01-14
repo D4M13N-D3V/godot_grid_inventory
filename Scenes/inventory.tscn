@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cywjpuiv83f8n"]
+
+[ext_resource type="Script" path="res://Code/UI/Inventory.cs" id="1_n60jp"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_n60jp")

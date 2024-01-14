@@ -4,14 +4,18 @@ using Godot.Collections;
 
 namespace GodotGridInventory.Code;
 
-public class ItemDatabase
+public partial class ItemDatabase:Node
 {
-    public static ItemDatabase Instance { get; } = new();
+    public static ItemDatabase Instance = null;
     private readonly Dictionary<string, Item> _itemDatabase = new();
     
     public ItemDatabase()
     {
-        InitializeItemDatabase();
+        if (Instance == null)
+        {
+            Instance = this;
+            InitializeItemDatabase();
+        }
     }   
     
     public Item GetItemConfiguration(string id)
@@ -25,7 +29,7 @@ public class ItemDatabase
         var items = DirAccess.GetFilesAt(ItemDatabaseConstants.ITEMS_PATH).Where(filePath => filePath.EndsWith(ItemDatabaseConstants.ITEM_EXTENSION));
         foreach (var item in items)
         {
-            var itemResource = GD.Load<Item>(item);
+            var itemResource = GD.Load<Item>($"{ItemDatabaseConstants.ITEMS_PATH}/{item}");
             if (itemResource != null)
             {
                 _itemDatabase.Add(itemResource.Id, itemResource);

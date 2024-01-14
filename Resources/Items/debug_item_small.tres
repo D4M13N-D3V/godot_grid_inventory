@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ItemConfiguration" load_steps=3 format=3 uid="uid://c8ge77yvt0q84"]
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://c8ge77yvt0q84"]
 
-[ext_resource type="Script" path="res://Code/Items/ItemConfiguration.cs" id="1_8ae1i"]
+[ext_resource type="Script" path="res://Code/Items/Item.cs" id="1_8ae1i"]
 [ext_resource type="Texture2D" uid="uid://bj3tjdbw5xdlj" path="res://icon.svg" id="1_arnqm"]
 
 [resource]
@@ -8,7 +8,8 @@ script = ExtResource("1_8ae1i")
 Id = "item_small"
 Name = "Item Small"
 Description = "A small item."
-Size = Vector2(3, 3)
+Size = Vector2(2, 2)
 Texture = ExtResource("1_arnqm")
-Actions = 0
+Flags = 0
 Slots = PackedStringArray()
+Tags = PackedStringArray()

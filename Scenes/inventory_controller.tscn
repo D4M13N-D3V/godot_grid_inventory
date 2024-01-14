@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b217xbxheivtx"]
+
+[ext_resource type="Script" path="res://Code/InventoryController.cs" id="1_fowd5"]
+[ext_resource type="PackedScene" uid="uid://brwundq5p4s3c" path="res://Scenes/inventory_grid.tscn" id="2_74voh"]
+[ext_resource type="PackedScene" uid="uid://cywjpuiv83f8n" path="res://Scenes/inventory.tscn" id="2_wrxgt"]
+[ext_resource type="PackedScene" uid="uid://dxmeyjh8klieh" path="res://Scenes/inventory_item.tscn" id="4_8j1em"]
+
+[node name="InventoryController" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fowd5")
+InventoryUIResource = ExtResource("2_wrxgt")
+InventoryGridUIResource = ExtResource("2_74voh")
+InventoryGridItemUIResource = ExtResource("4_8j1em")
+
+[node name="Inventory" parent="." instance=ExtResource("2_wrxgt")]
