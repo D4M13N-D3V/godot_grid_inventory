@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using GodotGridInventory.Code.Grid;
+using GodotGridInventory.Code.UI;
+using InventoryGrid = GodotGridInventory.Code.Grid.InventoryGrid;
 
 namespace GodotGridInventory.Code;
 
-public partial class InventoryController : Node
+public partial class InventoryController : Control
 {
-    private int _inventoryIdCounter = 0;
+    public static int PLAYER_INVENTORY_ID = 0;
+    #region Private Variables
     private readonly ItemDatabase _itemDatabase = ItemDatabase.Instance;
-    [Export] public float CellSize { get; set; } = 32;
-    private Dictionary<int,InventoryModel> _inventories { get; set; } = new Dictionary<int,InventoryModel>();
     
-    public override void _Ready()
+    private int _inventoryIdCounter = 0;
+    #endregion
+    
+    [Export] public float CellSize { get; set; } = 25;
+    
+    #region Public Methods
+    public List<InventoryModel> GetInventoriesLoaded()
     {
-        base._Ready();
+        var result = _inventories.Values.ToList();
+        GD.Print($"Getting list of all _inventoriesLoaded loaded into memory ({result.Count}).");
+        return result;
     }
-
+    
     public bool UpdateInventory(int id, InventoryModel inventoryModel)
     {
         var inventory = _inventories[id];
@@ -123,10 +132,13 @@ public partial class InventoryController : Node
         return true;
     }
     
-    public List<InventoryModel> GetInventoriesLoaded()
+    #endregion
+    private Dictionary<int,InventoryModel> _inventories { get; set; } = new Dictionary<int,InventoryModel>();
+    
+    public override void _Ready()
     {
-        var result = _inventories.Values.ToList();
-        GD.Print($"Getting list of all _inventoriesLoaded loaded into memory ({result.Count}).");
-        return result;
+        base._Ready();
     }
+
+
 }

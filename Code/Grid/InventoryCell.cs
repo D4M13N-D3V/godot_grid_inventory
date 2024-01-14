@@ -1,5 +1,6 @@
 using Godot;
 using GodotGridInventory.Code.Grid.Enums;
+using GodotGridInventory.Code.UI;
 
 namespace GodotGridInventory.Code.Grid;
 
@@ -10,6 +11,7 @@ public class InventoryCell
     public Vector2 Position { get; set; }
     public EnumInventoryGridCellState State { get; set; }
     public Item? Item { get; set; } = null;
+    public InventoryGridItem? ItemGraphic { get; set; } = null;
     
     
     public InventoryCell(Vector2 position, InventoryGrid parentGrid)

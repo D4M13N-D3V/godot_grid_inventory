@@ -15,6 +15,6 @@ public class InventoryModel
     public List<Item> Items { get; set; } = new List<Item>();
     public List<InventoryCell> Cells { get; set; } = new List<InventoryCell>();
     public InventoryGrid? Grid { get; set; } = null;
-    public InventoryGridInterface? GridInterface { get; set; } = null;
+    public UI.InventoryGrid? GridInterface { get; set; } = null;
     public bool Open { get; set; } = false;
 }
